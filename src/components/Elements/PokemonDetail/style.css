@@ -1,0 +1,14 @@
+.componentDetail {
+  display: flex;
+  position: absolute;
+  font-size: 2em;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  margin: 15px;
+}
+
+.componentDetailStatus {
+  display: flex;
+  justify-content:space-between; 
+  margin-top: 1em; 
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+}
