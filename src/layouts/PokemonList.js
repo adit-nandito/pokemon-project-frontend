@@ -1,13 +1,6 @@
-import { useState, Fragment, useEffect } from 'react';
+import { useState, Fragment } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { getListMyPokemon, getListPokemon, releasePokemon, renamePokemon } from '../services/APIService';
-import { useDispatch, useSelector } from 'react-redux';
-import PaginationRounded from '../components/pagination/Pagination';
-import Thumbnail from '../components/thumbnail/Thumbnail';
-import './style.css';
-import SelectInput from '../components/selectInput/SelectInput';
-import { setCatchablePokemon, setPage, setRarePokemon } from '../redux/slices/pokemonSlice';
-import TabMenu from '../components/tabMenu/TabMenu';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   CardActionArea,
@@ -21,15 +14,19 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+import { setCatchablePokemon, setSecretPokemon } from '../redux/slices/pokemonSlice';
+import { releasePokemon, renamePokemon } from '../services/APIService';
+import PaginationRounded from '../components/pagination/Pagination';
+import Thumbnail from '../components/thumbnail/Thumbnail';
+import SelectInput from '../components/selectInput/SelectInput';
+import TabMenu from '../components/tabMenu/TabMenu';
+import './style.css';
 
 const PokemonList = (props) => {
-  const { isMyPokemon } = props;
   const response = useLoaderData();
+  const dispatch = useDispatch();
 
   // const typePage = useSelector((state) => state.pokemon.page);
-  // const dispatch = useDispatch();
-  // dispatch(setCatchablePokemon(listCatchablePokemon));
-  // dispatch(setRarePokemon(listRarePokemon));
   // console.log('count========', count);
 
   const offset = 27;
@@ -38,23 +35,26 @@ const PokemonList = (props) => {
   const [isShowDialogConfirm, setShowDialogConfirm] = useState(false);
   const [idPokemon, setIDPokemon] = useState('');
   const [pageCatchablePokemon, setPageCatchablePokemon] = useState(1);
-  const [pageRarePokemon, setPageRarePokemon] = useState(1);
+  const [pageSecretPokemon, setPageSecretPokemon] = useState(1);
   const [typePage, setTypePage] = useState('main');
 
   const listCatchablePokemon = response.catchablePokemon.list;
-  const listRarePokemon = response.secretPokemon.list;
+  const listSecretPokemon = response.secretPokemon.list;
   const limitCatchablePokemon = response.catchablePokemon.limit;
-  const limitRarePokemon = response.secretPokemon.limit;
-  const limitPokemon = typePage === 'secret' ? limitRarePokemon : limitCatchablePokemon;
+  const limitSecretPokemon = response.secretPokemon.limit;
+  const limitPokemon = typePage === 'secret' ? limitSecretPokemon : limitCatchablePokemon;
+
+  dispatch(setCatchablePokemon(listCatchablePokemon));
+  dispatch(setSecretPokemon(listSecretPokemon));
 
   const __generateMainPage = (dataObject) => {
-    const { listCatchablePokemon, listRarePokemon } = dataObject;
-    const pageValue = typePage === 'secret' ? pageRarePokemon : pageCatchablePokemon;
+    const { listCatchablePokemon, listSecretPokemon } = dataObject;
+    const pageValue = typePage === 'secret' ? pageSecretPokemon : pageCatchablePokemon;
     const minValue = (pageValue - 1) * offset;
     const maxValue = minValue + offset;
     let listPokemon = listCatchablePokemon.slice(minValue, maxValue);
     if (typePage === 'secret') {
-      listPokemon = listRarePokemon.slice(minValue, maxValue);
+      listPokemon = listSecretPokemon.slice(minValue, maxValue);
     }
 
     return listPokemon.map((item) => (
@@ -203,12 +203,12 @@ const PokemonList = (props) => {
             offset={offset}
             typePage={typePage}
             setPageCatchablePokemon={setPageCatchablePokemon}
-            setPageRarePokemon={setPageRarePokemon}
+            setPageSecretPokemon={setPageSecretPokemon}
             pageCatchablePokemon={pageCatchablePokemon}
-            pageRarePokemon={pageRarePokemon}
+            pageSecretPokemon={pageSecretPokemon}
           ></PaginationRounded>
         </div>
-        {__generateMainPage({ typePage, listCatchablePokemon, listRarePokemon })}
+        {__generateMainPage({ typePage, listCatchablePokemon, listSecretPokemon })}
       </div>
       <div className="componentSelectedInput">
         <SelectInput
@@ -216,9 +216,9 @@ const PokemonList = (props) => {
           offset={offset}
           typePage={typePage}
           setPageCatchablePokemon={setPageCatchablePokemon}
-          setPageRarePokemon={setPageRarePokemon}
+          setPageSecretPokemon={setPageSecretPokemon}
           pageCatchablePokemon={pageCatchablePokemon}
-          pageRarePokemon={pageRarePokemon}
+          pageSecretPokemon={pageSecretPokemon}
         />
       </div>
     </div>

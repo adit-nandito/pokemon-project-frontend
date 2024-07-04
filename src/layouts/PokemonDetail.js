@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import './style.css';
-import { catchPokemon, getDetailPokemon } from '../services/APIService';
-import BoxDesc from '../components/boxDesc/BoxDesc';
-import { useLoaderData } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setPage } from '../redux/slices/pokemonSlice';
+import { useState } from 'react';
+import { useLoaderData, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   Alert,
   Button,
@@ -19,12 +15,20 @@ import {
   Snackbar,
   Typography
 } from '@mui/material';
+import { ArrowBackIosRounded, ArrowForwardIosRounded } from '@mui/icons-material';
+import { catchPokemon } from '../services/APIService';
+import BoxDesc from '../components/boxDesc/BoxDesc';
+import './style.css';
 
 const PokemonDetail = () => {
+  const { name } = useParams();
   const pokemonDetail = useLoaderData();
   const slideTransition = (props) => {
     return <Slide {...props} direction="down" />;
   };
+
+  const pokemon = useSelector((state) => state.pokemon);
+  const { listCatchablePokemon, listSecretPokemon } = pokemon;
 
   const [stateIsShowPopup, setStateShowPopup] = useState(false);
   const [stateIsShowSnackbar, setStateShowSnackbar] = useState(false);
@@ -41,6 +45,51 @@ const PokemonDetail = () => {
   //     }
   //   });
   // }, []);
+
+  const __generateButtonPokemonDetail = (dataObject) => {
+    const { name, isCatchablePokemon, listCatchablePokemon, listSecretPokemon } = dataObject;
+    let list = listSecretPokemon;
+    if (isCatchablePokemon) {
+      list = listCatchablePokemon;
+    }
+
+    const index = list.findIndex((item) => item.id === name);
+    console.log('PokemonDetail ~ index=====', index);
+    const prevPokemon = list[index - 1];
+    console.log('PokemonDetail ~ prevPokemon=====', prevPokemon);
+    const nextPokemon = list[index + 1];
+    console.log('PokemonDetail ~ nextPokemon=====', nextPokemon);
+
+    let prevPokemonButton = '';
+    let nextPokemonButton = '';
+
+    if (prevPokemon) {
+      prevPokemonButton = (
+        <span>
+          <Button href={`/detail/${prevPokemon.id}`} variant="contained" startIcon={<ArrowBackIosRounded />}>
+            Prev Pokémon
+          </Button>
+        </span>
+      );
+    }
+
+    if (nextPokemon) {
+      nextPokemonButton = (
+        <span>
+          <Button href={`/detail/${nextPokemon.id}`} variant="contained" endIcon={<ArrowForwardIosRounded />}>
+            Next Pokémon
+          </Button>
+        </span>
+      );
+    }
+
+    return (
+      <div className="componentButtonPrevNextDetail">
+        {prevPokemonButton}
+        {nextPokemonButton}
+      </div>
+    );
+  };
 
   const handleCatch = () => {
     setStateShowPopup(false);
@@ -104,6 +153,12 @@ const PokemonDetail = () => {
             <span className="componentStatusDescDetail">
               <BoxDesc title="Abilities" pokemonDetail={pokemonDetail} type="abilities" />
               <BoxDesc title="Base Status" pokemonDetail={pokemonDetail} type="basestatus" />
+              {__generateButtonPokemonDetail({
+                name,
+                isCatchablePokemon: pokemonDetail.isCatchablePokemon,
+                listCatchablePokemon,
+                listSecretPokemon
+              })}
             </span>
           </div>
         ) : (

@@ -6,16 +6,16 @@ const PaginationRounded = (props) => {
     offset,
     typePage,
     setPageCatchablePokemon,
-    setPageRarePokemon,
+    setPageSecretPokemon,
     pageCatchablePokemon,
-    pageRarePokemon
+    pageSecretPokemon
   } = props;
 
   let page = pageCatchablePokemon;
   let setPage = setPageCatchablePokemon;
   if (typePage === 'secret') {
-    page = pageRarePokemon;
-    setPage = setPageRarePokemon;
+    page = pageSecretPokemon;
+    setPage = setPageSecretPokemon;
   }
 
   return (

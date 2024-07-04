@@ -29,6 +29,8 @@ justify-content: center;
   width: 100%;
   margin-top: 2em;
   margin-left: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .componentIndexNumber {
@@ -53,6 +55,11 @@ justify-content: center;
   padding: 1.2em;
 }
 
-
+.componentButtonPrevNextDetail {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  top: 10%;
+}
 
 

@@ -1,15 +1,16 @@
 import { StrictMode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Footer from './components/footer/footer';
-import store from './redux/store';
-import routes from './routers/routes';
-import './index.css';
-import ResponsiveAppBar from './components/appBar/AppBar';
-import Loading from './components/loading/Loading';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { store, persistor } from './redux/store';
+import routes from './routers/routes';
+import ResponsiveAppBar from './components/appBar/AppBar';
+import Footer from './components/footer/footer';
+import Loading from './components/loading/Loading';
+import './index.css';
 
 const darkTheme = createTheme({
   palette: {
@@ -28,11 +29,13 @@ root.render(
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Provider store={store}>
-        <Suspense fallback={<Loading />}>
-          <ResponsiveAppBar />
-          <RouterProvider router={router}></RouterProvider>
-          <Footer />
-        </Suspense>
+        <PersistGate loading={null} persistor={persistor}>
+          <Suspense fallback={<Loading />}>
+            <ResponsiveAppBar />
+            <RouterProvider router={router}></RouterProvider>
+            <Footer />
+          </Suspense>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </StrictMode>

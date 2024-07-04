@@ -5,7 +5,7 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: {
     listCatchablePokemon: [],
-    listRarePokemon: [],
+    listSecretPokemon: [],
     page: 'main'
   },
   reducers: {
@@ -14,16 +14,13 @@ const pokemonSlice = createSlice({
         state.listCatchablePokemon.push(...action.payload);
       }
     },
-    setRarePokemon: (state, action) => {
-      if (_.isEmpty(state.listRarePokemon)) {
-        state.listRarePokemon.push(...action.payload);
+    setSecretPokemon: (state, action) => {
+      if (_.isEmpty(state.listSecretPokemon)) {
+        state.listSecretPokemon.push(...action.payload);
       }
-    },
-    setPage: (state, action) => {
-      state.page = action.payload;
     }
   }
 });
 
-export const { setCatchablePokemon, setRarePokemon, setPage } = pokemonSlice.actions;
+export const { setCatchablePokemon, setSecretPokemon } = pokemonSlice.actions;
 export default pokemonSlice.reducer;
