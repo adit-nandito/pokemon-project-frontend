@@ -1,0 +1,10 @@
+.tabMenuComponent {
+  div {
+    div {
+      justify-content: space-around;
+      button {
+        width: 100%;
+      }
+    } 
+  }
+}

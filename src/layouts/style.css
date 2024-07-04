@@ -1,0 +1,58 @@
+.layoutPokemonList{
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+.componentImageDetail {
+display: flex;
+justify-content: center;
+}
+
+.componentDetailPage { 
+  display: flex; 
+  justify-content: center; 
+  height: calc(100% - 120px);
+  padding-top: 14.5px;
+}
+
+.componentDetailLayout {
+  display: flex;
+}
+
+.componentProfileDetail {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.componentStatusDescDetail {
+  width: 100%;
+  margin-top: 2em;
+  margin-left: 10px;
+}
+
+.componentIndexNumber {
+  display: flex;
+  position: absolute;
+  font-size: 2em;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  margin: 15px;
+}
+
+.componentPagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2em 0;
+}
+
+.componentSelectedInput {
+  display: flex;
+  justify-content: center;
+  padding: 1.2em;
+}
+
+
+
+

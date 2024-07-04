@@ -1,0 +1,6 @@
+.componentDetailStatus {
+  display: flex;
+  justify-content:space-between; 
+  margin-top: 1em; 
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+}

@@ -1,0 +1,34 @@
+.componentStatisticDetail {
+  padding: 1em;
+  align-self: center;
+  width: 100%;
+  border: 8px white;
+  border-style: double;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.componentDescAbilities {
+  display: flex;
+}
+
+.componentDescAbilitesImg {
+  align-self: center;
+  padding-right: 10px;
+}
+
+.componentDescAbilitesLine {
+  align-content: center;
+}
+
+.componentDescAbilitesText {
+  align-content: center;
+  padding-bottom: 1em;
+}
+
+.componentDescAbilitesText:last-child {
+  padding-bottom: 0;
+}

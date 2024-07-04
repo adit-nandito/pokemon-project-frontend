@@ -1,16 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
+import _ from 'lodash';
 
 const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: {
-    isUpdated: false
+    listCatchablePokemon: [],
+    listRarePokemon: [],
+    page: 'main'
   },
   reducers: {
-    addPokemon: (state, action) => {
-      state.isUpdated = action.payload;
+    setCatchablePokemon: (state, action) => {
+      if (_.isEmpty(state.listCatchablePokemon)) {
+        state.listCatchablePokemon.push(...action.payload);
+      }
+    },
+    setRarePokemon: (state, action) => {
+      if (_.isEmpty(state.listRarePokemon)) {
+        state.listRarePokemon.push(...action.payload);
+      }
+    },
+    setPage: (state, action) => {
+      state.page = action.payload;
     }
   }
 });
 
-export const { addPokemon } = pokemonSlice.actions;
+export const { setCatchablePokemon, setRarePokemon, setPage } = pokemonSlice.actions;
 export default pokemonSlice.reducer;

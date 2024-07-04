@@ -7,4 +7,8 @@ const store = configureStore({
   }
 });
 
+store.subscribe(() => {
+  console.log('Get State---------------', store.getState());
+});
+
 export default store;
