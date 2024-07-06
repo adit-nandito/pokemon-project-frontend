@@ -1,10 +1,11 @@
-import './style.css'; // Optional: Add some CSS for styling
+import './style.css';
 
 const Loading = () => {
   return (
     <div className="loadingContainer">
-      <div className="spinner"></div>
-      <p>Loading...</p>
+      <div className="pokeball">
+        <div className="pokebutton"></div>
+      </div>
     </div>
   );
 };

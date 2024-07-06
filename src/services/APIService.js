@@ -2,40 +2,16 @@ import Axios from 'axios';
 import _ from 'lodash';
 import STATIC_URL from '../utils/url';
 
-// const getListPokemon = async (callback) => {
-//   try {
-//     const response = await Axios.get(`${STATIC_URL.localhost}/list-all`);
-//     callback(null, response.data);
-//   } catch (err) {
-//     callback(err);
-//   }
-// };
-
-const getListPokemon = async () => {
+const getListPokemon = async (callback) => {
   try {
     const response = await Axios.get(`${STATIC_URL.localhost}/list-all`);
-    return Promise.resolve(response.data);
+    callback(null, response.data);
   } catch (err) {
-    return Promise.reject(err);
+    callback(err);
   }
 };
 
-// const getDetailPokemon = async (name, callback) => {
-//   try {
-//     const response = await Axios.get(`${STATIC_URL.localhost}/detail`, {
-//       params: {
-//         name
-//       }
-//     });
-
-//     callback(null, response.data);
-//   } catch (err) {
-//     callback(err);
-//   }
-// };
-
-const getDetailPokemon = async (props) => {
-  const { name } = props.params;
+const getDetailPokemon = async (name, callback) => {
   try {
     const response = await Axios.get(`${STATIC_URL.localhost}/detail`, {
       params: {
@@ -43,9 +19,9 @@ const getDetailPokemon = async (props) => {
       }
     });
 
-    return Promise.resolve(response.data);
+    callback(null, response.data);
   } catch (err) {
-    return Promise.reject(err);
+    callback(err);
   }
 };
 
