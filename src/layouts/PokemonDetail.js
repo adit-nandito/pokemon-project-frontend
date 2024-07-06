@@ -18,7 +18,7 @@ const PokemonDetail = () => {
 
   useEffect(() => {
     getDetailPokemon(name, (err, data) => {
-      // setLoading(false);
+      setLoading(false);
       if (err) {
         return <ErrorPage />;
       } else {
