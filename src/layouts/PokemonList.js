@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCatchablePokemon, setSecretPokemon } from '../redux/slices/pokemonSlice';
-import { getListPokemon } from '../services/APIService';
+import { getListPokemon, getPokemonBall } from '../services/APIService';
 import ErrorPage from '../pages/ErrorPage';
 import Loading from '../components/loading/Loading';
 import PaginationRounded from '../components/pagination/Pagination';
@@ -9,6 +9,7 @@ import Thumbnail from '../components/thumbnail/Thumbnail';
 import SelectInput from '../components/selectInput/SelectInput';
 import TabMenu from '../components/tabMenu/TabMenu';
 import './style.css';
+import DialogPopUp from '../components/dialogPopUp/DialogPopUp';
 
 const PokemonList = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ const PokemonList = () => {
   const [listCatchablePokemon, setListCatchablePokemon] = useState([]);
   const [listSecretPokemon, setListSecretPokemon] = useState([]);
   const [limitPokemon, setLimitPokemon] = useState(0);
+  const [dialogDetail, setDialogDetail] = useState({});
+  const [isLoadingDialog, setLoadingDialog] = useState(false);
+
+  const action = useSelector((state) => state.action);
+  const { isShowPopupGetPokeball } = action;
 
   useEffect(() => {
     getListPokemon((err, res) => {
@@ -41,6 +47,29 @@ const PokemonList = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (isShowPopupGetPokeball) {
+      setLoadingDialog(true);
+      getPokemonBall((err, res) => {
+        setTimeout(() => {
+          setLoadingDialog(false);
+        }, 1000);
+        if (err) {
+          return console.log('error popup');
+        } else {
+          const image = require(`../assets/${res.id}.png`);
+          const object = {
+            image,
+            title: res.name,
+            desc: res.desc,
+            btnText1: 'OK'
+          };
+          setDialogDetail(object);
+        }
+      });
+    }
+  }, [isShowPopupGetPokeball]);
+
   const generateMainPage = (dataObject) => {
     const { listCatchablePokemon, listSecretPokemon } = dataObject;
     const pageValue = typePage === 'secret' ? pageSecretPokemon : pageCatchablePokemon;
@@ -56,6 +85,18 @@ const PokemonList = () => {
         <Thumbnail index={item.index} id={item.id} image={item.image} />
       </div>
     ));
+  };
+
+  const generateDialogPopUp = () => {
+    if (isLoadingDialog) {
+      return <Loading />;
+    }
+
+    return (
+      isShowPopupGetPokeball && (
+        <DialogPopUp isShowPopupGetPokeball={isShowPopupGetPokeball} dialogDetail={dialogDetail} />
+      )
+    );
   };
 
   const generatePokemonListLayout = () => {
@@ -91,6 +132,8 @@ const PokemonList = () => {
             pageSecretPokemon={pageSecretPokemon}
           />
         </div>
+
+        {generateDialogPopUp()}
       </div>
     );
   };

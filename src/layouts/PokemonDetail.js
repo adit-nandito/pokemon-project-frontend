@@ -88,7 +88,7 @@ const PokemonDetail = () => {
               <div className="componentIndexNumber"># {pokemonDetail.index}</div>
               <div className="componentImageDetail">
                 <CardMedia
-                  sx={{ width: '100%' }}
+                  sx={{ width: 'unset' }}
                   component="img"
                   alt={pokemonDetail.name}
                   image={pokemonDetail.image}

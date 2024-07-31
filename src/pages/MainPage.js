@@ -1,12 +1,9 @@
-import { lazy, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { lazy } from 'react';
 import _ from 'lodash';
-import { createBrowserRouter, RouterProvider, useLocation, useParams } from 'react-router-dom';
-import Logo from '../assets/pokemon-navbar.png';
-import TabMenu from '../components/tabMenu/TabMenu';
-import routes from '../routers/routes';
+import { useLocation } from 'react-router-dom';
+
 import './style.css';
-import ResponsiveAppBar from '../components/appBar/AppBar';
+
 const PokemonList = lazy(() => import('../layouts/PokemonList'));
 const PokemonDetail = lazy(() => import('../layouts/PokemonDetail'));
 

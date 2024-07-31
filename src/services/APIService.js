@@ -25,6 +25,15 @@ const getDetailPokemon = async (name, callback) => {
   }
 };
 
+const getPokemonBall = async (callback) => {
+  try {
+    const response = await Axios.get(`${STATIC_URL.localhost}/pokeball`);
+    callback(null, response.data);
+  } catch (err) {
+    callback(err);
+  }
+};
+
 const getListMyPokemon = async (callback) => {
   const listPokemonData = [];
   try {
@@ -89,4 +98,12 @@ const renamePokemon = async (id, nickname, callback) => {
   }
 };
 
-export { getListPokemon, getDetailPokemon, getListMyPokemon, catchPokemon, releasePokemon, renamePokemon };
+export {
+  getListPokemon,
+  getDetailPokemon,
+  getPokemonBall,
+  getListMyPokemon,
+  catchPokemon,
+  releasePokemon,
+  renamePokemon
+};

@@ -5,8 +5,7 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: {
     listCatchablePokemon: [],
-    listSecretPokemon: [],
-    page: 'main'
+    listSecretPokemon: []
   },
   reducers: {
     setCatchablePokemon: (state, action) => {
