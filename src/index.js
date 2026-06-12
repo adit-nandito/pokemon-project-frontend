@@ -7,9 +7,9 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { store, persistor } from './redux/store';
 import routes from './routers/routes';
-import ResponsiveAppBar from './components/appBar/AppBar';
-import Footer from './components/footer/footer';
-import Loading from './components/loading/Loading';
+import ResponsiveAppBar from './components/ui/appBar/AppBar';
+import Footer from './components/ui/footer/footer';
+import Loading from './components/ui/loading/Loading';
 import './index.css';
 
 const darkTheme = createTheme({

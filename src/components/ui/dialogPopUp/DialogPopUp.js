@@ -10,7 +10,7 @@ import {
   Slide
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setShowPopupGetPokeball } from '../../redux/slices/actionSlice';
+import { setShowPopupGetPokeball } from '../../../redux/slices/actionSlice';
 import DOMPurify from 'dompurify';
 
 const Transition = forwardRef((props, ref) => {
