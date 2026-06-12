@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import './style.css';
 import { AppBar, Box, Button, Container, Link, Toolbar, Typography } from '@mui/material';
-import { setShowPopupGetPokeball } from '../../redux/slices/actionSlice';
+import { setShowPopupGetPokeball } from '../../../redux/slices/actionSlice';
 
 const ResponsiveAppBar = () => {
   const dispatch = useDispatch();

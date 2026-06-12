@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { ArrowBackIosRounded, ArrowForwardIosRounded } from '@mui/icons-material';
-import { getDetailPokemon } from '../services/APIService';
+import { getDetailPokemon } from '../../services/api';
 import ErrorPage from '../pages/ErrorPage';
-import Loading from '../components/loading/Loading';
-import BoxDesc from '../components/boxDesc/BoxDesc';
+import Loading from '../ui/loading/Loading';
+import BoxDesc from '../ui/boxDesc/BoxDesc';
 import './style.css';
 
 const PokemonDetail = () => {

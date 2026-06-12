@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCatchablePokemon, setSecretPokemon } from '../redux/slices/pokemonSlice';
-import { getListPokemon, getPokemonBall } from '../services/APIService';
+import { setCatchablePokemon, setSecretPokemon } from '../../redux/slices/pokemonSlice';
+import { getListPokemon, getPokemonBall } from '../../services/api';
 import ErrorPage from '../pages/ErrorPage';
-import Loading from '../components/loading/Loading';
-import PaginationRounded from '../components/pagination/Pagination';
-import Thumbnail from '../components/thumbnail/Thumbnail';
-import SelectInput from '../components/selectInput/SelectInput';
-import TabMenu from '../components/tabMenu/TabMenu';
+import Loading from '../ui/loading/Loading';
+import PaginationRounded from '../ui/pagination/Pagination';
+import Thumbnail from '../ui/thumbnail/Thumbnail';
+import SelectInput from '../ui/selectInput/SelectInput';
+import TabMenu from '../ui/tabMenu/TabMenu';
 import './style.css';
-import DialogPopUp from '../components/dialogPopUp/DialogPopUp';
+import DialogPopUp from '../ui/dialogPopUp/DialogPopUp';
 
 const PokemonList = () => {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const PokemonList = () => {
         if (err) {
           return console.log('error popup');
         } else {
-          const image = require(`../assets/${res.id}.png`);
+          const image = require(`../../assets/${res.id}.png`);
           const object = {
             image,
             title: res.name,
