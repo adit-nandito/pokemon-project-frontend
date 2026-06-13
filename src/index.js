@@ -7,7 +7,6 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { store, persistor } from './redux/store';
 import routes from './routers/routes';
-import ResponsiveAppBar from './components/ui/appBar/AppBar';
 import Footer from './components/ui/footer/footer';
 import Loading from './components/ui/loading/Loading';
 import './index.css';
@@ -31,7 +30,6 @@ root.render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Suspense fallback={<Loading />}>
-            <ResponsiveAppBar />
             <RouterProvider router={router}></RouterProvider>
             <Footer />
           </Suspense>

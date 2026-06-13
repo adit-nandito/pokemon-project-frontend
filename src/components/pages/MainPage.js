@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { useLocation } from 'react-router-dom';
 
 import './style.css';
+import ResponsiveAppBar from '../ui/AppBar/AppBar';
 
 const PokemonList = lazy(() => import('../layouts/PokemonList'));
 const PokemonDetail = lazy(() => import('../layouts/PokemonDetail'));
@@ -17,6 +18,11 @@ const MainPage = () => {
     return <PokemonList />;
   };
 
-  return <div id="MainPage">{__generateMainPage()}</div>;
+  return (
+    <div id="MainPage">
+      <ResponsiveAppBar />
+      {__generateMainPage()}
+    </div>
+  );
 };
 export default MainPage;
